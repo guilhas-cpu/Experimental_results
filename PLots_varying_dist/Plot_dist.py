@@ -2,6 +2,11 @@ import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+from scipy.optimize import curve_fit
+
+def func(x, a, b, c):
+    return a * np.exp(-b * x) + c
+
 
 f = 1e3
 hscale = 2.50e-4*1e3
@@ -86,9 +91,15 @@ plt.xlabel('Current(uA)')
 plt.figure()
 Distance = np.arange(2,11,2)
 DeltaV = [1550,576,336,176,100]
-plt.plot(Distance,DeltaV,'-*')
+
+xnew = np.linspace(2,10,100)
+popt, pcov = curve_fit(func, Distance,DeltaV)
+plt.plot(xnew,func(xnew,*popt),'r--',label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
+
+plt.plot(Distance,DeltaV,'o',label='Experimental Data')
 plt.title('Vout vs Distance')
 plt.ylabel('Signal(mV)')
 plt.xlabel('Distance(cm)')
+plt.legend()
 
 plt.show()

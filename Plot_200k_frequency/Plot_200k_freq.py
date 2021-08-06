@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+from scipy.optimize import curve_fit
+
+def func(x, a, b, c):
+    return a * x**2+ b*x+c
 
 f = 250
 hscale = 2.50e-3*1e3
@@ -182,10 +186,16 @@ plt.xlabel('time(ms)')
 plt.figure()
 frequency = [500,1e3,2e3,3e3,4e3,5e3,6e3,7e3,8e3,9e3,10e3]
 Vout = [2.7,2.72,2.7,2.7,2.6,2.56,2.56,2.4,2.3,2.25,2.1]
-plt.plot(frequency,Vout,'*-')
+
+xnew = np.linspace(0,10e3,1000)
+popt, pcov = curve_fit(func, frequency,Vout)
+plt.plot(frequency,Vout,'o',label='Experimental Data')
+plt.plot(xnew,func(xnew,*popt),'r--',label='fit: a=%1.9f, b=%1.6f, c=%5.3f' % tuple(popt))
+
 plt.xticks(frequency,['500Hz','1kHz','2kHz','3kHz','4kHz','5kHz','6kHz','7kHz','8kHz','9kHz','10kHz'])
 plt.ylabel('Signal(V)')
 plt.xlabel('Frequency')
 plt.title('Vout x frequency')
+plt.legend()
 plt.show()
  
