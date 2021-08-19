@@ -15,7 +15,7 @@ plt.legend()
 plt.xticks(np.arange(0,2501,250),np.arange(0,hscale*11,hscale))
 plt.yticks([-0.36,0,1,2,3,4,5])
 plt.title('Vout receiver module (f=250Hz)')
-plt.ylabel('Signal(V)')
+plt.ylabel('Signal(V)'
 plt.xlabel('time(ms)')
 
 f = 500

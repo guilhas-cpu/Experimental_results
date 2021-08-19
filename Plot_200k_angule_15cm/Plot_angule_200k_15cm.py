@@ -6,8 +6,7 @@ from scipy.optimize import curve_fit
 def func(x, a, b, c,d,e):
     return a*x**4+b*x**3+c*x**2+d*x+e
 
-#def func(x,a,b,c):
-    #return a*x**2 +b*x+c
+
 
 
 f = 1e3
