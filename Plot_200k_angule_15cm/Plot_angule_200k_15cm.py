@@ -6,7 +6,8 @@ from scipy.optimize import curve_fit
 def func(x, a, b, c,d,e):
     return a*x**4+b*x**3+c*x**2+d*x+e
 
-
+def gauss(x,A,mu,sigma):
+    return A*np.exp(-(x-mu)**2/(2.*sigma**2))
 
 
 f = 1e3
@@ -101,13 +102,13 @@ plt.xlabel('time(ms)')
 plt.figure()
 angule = [-15,-10,-5,0,5,10,15]
 signal = [-92,-580,-2520,-2800,-2600,-660,-105]
-popt, pcov = curve_fit(func, angule,signal)
+popt, pcov = curve_fit(gauss, angule,signal)
 xnew = np.linspace(-15,15,100)
 plt.plot(angule,signal,'o',label='Experimental Data')
-plt.plot(xnew,func(xnew,*popt),'r--',label='fit: a=%5.3f, b=%5.3f, c=%5.3f d=%5.3f e=%5.3f' % tuple(popt))
+plt.plot(xnew,gauss(xnew,*popt),'r--',label='fit: a=%5.3f, mu=%5.3f, sigma=%5.3f' % tuple(popt))
 #plt.plot(xnew,func(xnew,*popt),'r--',label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
 plt.xticks([-15,-10,-5,0,5,10,15],['-15°','-10°','-5°','0°','5°','10°','15°'])
-plt.ylabel('Signal(mV)')
+plt.ylabel('Tensão de saída(mV)')
 plt.xlabel('Angule(°)')
 plt.title('Angule Variation @15cm')
 plt.legend()
