@@ -13,8 +13,8 @@ def gauss(x,A,mu,sigma):
 f = 1e3
 hscale = 5e-4*1e3
 
-data_CH1 = pd.read_csv('F0028CH1.CSV', usecols=[4])
-data_CH2 = pd.read_csv('F0028CH2.CSV', usecols=[4])
+data_CH1 = pd.read_csv('F0026CH1.CSV', usecols=[4])
+data_CH2 = pd.read_csv('F0026CH2.CSV', usecols=[4])
 
 plt.figure()
 plt.plot(data_CH1, label='Input')
@@ -108,7 +108,7 @@ plt.plot(angule,signal,'o',label='Experimental Data')
 plt.plot(xnew,gauss(xnew,*popt),'r--',label='fit: a=%5.3f, mu=%5.3f, sigma=%5.3f' % tuple(popt))
 #plt.plot(xnew,func(xnew,*popt),'r--',label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
 plt.xticks([-15,-10,-5,0,5,10,15],['-15°','-10°','-5°','0°','5°','10°','15°'])
-plt.ylabel('Tensão de saída(mV)')
+plt.ylabel('Tensão de saída(V)')
 plt.xlabel('Angule(°)')
 plt.title('Angule Variation @15cm')
 plt.legend()
