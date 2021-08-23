@@ -3,13 +3,17 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit
 
+
+
+
+
 def func(x, a, b, c):
     return a * x**2 + b* x + c
 
 def fun2(x,a):
     return a/x**2
 f = 1e3
-hscale = 2.50e-4*1e3
+hscale = 5e-4*1e3
 
 data_CH1 = pd.read_csv('F0021CH1.CSV', usecols=[4])
 data_CH2 = pd.read_csv('F0021CH2.CSV', usecols=[4])
@@ -115,7 +119,9 @@ plt.xlabel('time(ms)')
 data_CH1 = pd.read_csv('F0028CH1.CSV', usecols=[4])
 data_CH2 = pd.read_csv('F0028CH2.CSV', usecols=[4])
 
+
 plt.figure()
+
 plt.plot(data_CH1, label='Input')
 plt.plot(data_CH2, label='Output')
 plt.legend()
@@ -125,6 +131,9 @@ plt.title('Vout receiver module (Distance=5cm)')
 plt.ylabel('Tensão de saída(V)')
 
 plt.xlabel('time(ms)')
+
+
+
 
 plt.figure()
 Distance = np.arange(5,36,5)
@@ -138,6 +147,8 @@ plt.title('Vout vs Distance')
 plt.ylabel('Tensão de saída(V)')
 plt.xlabel('Distance(cm)')
 plt.legend()
+
+
 
 
 plt.show()
